@@ -7,10 +7,13 @@ module.exports = grammar({
   ],
 
   rules: {
-    source_file: $ => repeat(seq(
-      $.statement,
-      $._statement_line_ending,
-    )),
+    source_file: $ => seq(
+      repeat(seq(
+        $.statement,
+        $._statement_line_ending,
+      )),
+      optional($.statement),
+    ),
 
     statement: $ => choice(
       $.function_declaration,

@@ -2,20 +2,37 @@
   "name": "duso",
   "rules": {
     "source_file": {
-      "type": "REPEAT",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "statement"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_statement_line_ending"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "statement"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_statement_line_ending"
+              }
+            ]
           }
-        ]
-      }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "statement"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
     },
     "statement": {
       "type": "CHOICE",
