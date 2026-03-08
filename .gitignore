@@ -1,0 +1,8 @@
+node_modules/
+build/
+*.node
+.DS_Store
+dist/
+src/parser.c
+src/scanner.c
+src/tree_sitter/parser.h
