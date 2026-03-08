@@ -23,7 +23,7 @@ Then in your `extensions.json` (or via Settings UI):
 ```json
 {
   "extensions": [
-    "duso-org/tree-sitter-duso"
+    "duso-org/duso-tree-sitter"
   ]
 }
 ```
@@ -52,7 +52,7 @@ Add to your `init.lua`:
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.duso = {
   install_info = {
-    url = "https://github.com/duso-org/tree-sitter-duso",
+    url = "https://github.com/duso-org/duso-tree-sitter",
     files = { "src/parser.c" },
     branch = "main",
   },
@@ -84,7 +84,7 @@ comment = "^\\s*//.*"
 
 2. Build the grammar:
 ```bash
-git clone https://github.com/duso-org/tree-sitter-duso ~/.config/helix/runtime/grammars/duso
+git clone https://github.com/duso-org/duso-tree-sitter ~/.config/helix/runtime/grammars/duso
 cd ~/.config/helix/runtime/grammars/duso
 hx -g fetch duso
 hx -g build duso
@@ -130,7 +130,7 @@ npm install --ignore-scripts
 
 ### Parsing errors on valid Duso code
 
-1. File the issue at https://github.com/duso-org/tree-sitter-duso/issues
+1. File the issue at https://github.com/duso-org/duso-tree-sitter/issues
 2. Include the Duso code that failed to parse
 3. Run and share output of: `npx tree-sitter parse yourfile.du`
 

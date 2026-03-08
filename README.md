@@ -1,4 +1,4 @@
-# tree-sitter-duso
+# duso-tree-sitter
 
 A complete Tree-sitter grammar for the [Duso](https://github.com/duso-org/duso) scripting language.
 
