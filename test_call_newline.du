@@ -1,2 +1,0 @@
-result = map([1, 2], function(x) return x * 2 end);
-print(result)

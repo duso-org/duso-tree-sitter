@@ -1,3 +1,0 @@
-x = foo()
-y = bar(1, 2)
-z = baz(1, function(a) return a end)

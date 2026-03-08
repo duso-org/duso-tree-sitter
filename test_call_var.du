@@ -1,2 +1,0 @@
-myFunc = function(x) return x * 2 end
-result = myFunc(5)

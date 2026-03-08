@@ -1,2 +1,0 @@
-items = [1, 2, 3]
-result = map(items, function(x) return x * 2 end)

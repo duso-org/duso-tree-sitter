@@ -1,8 +1,4 @@
-#include <tree_sitter/parser.h>
-
-enum TokenType {
-  // Add token types here if needed
-};
+#include "tree_sitter/parser.h"
 
 void *tree_sitter_duso_external_scanner_create() {
   return NULL;
