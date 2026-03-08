@@ -1,5 +1,7 @@
 node_modules/
 build/
+target/
 *.node
 .DS_Store
 dist/
+Cargo.lock
