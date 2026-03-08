@@ -1,8 +1,16 @@
 module.exports = grammar({
   name: 'duso',
 
+  extras: $ => [
+    /\s/,
+    $.comment,
+  ],
+
   rules: {
-    source_file: $ => repeat($.statement),
+    source_file: $ => repeat(seq(
+      $.statement,
+      $._statement_line_ending,
+    )),
 
     statement: $ => choice(
       $.function_declaration,
@@ -13,23 +21,19 @@ module.exports = grammar({
       $.return_statement,
       $.break_statement,
       $.continue_statement,
-      $.expression_statement,
       $.variable_declaration,
       $.assignment_statement,
       $.compound_assignment_statement,
       $.postfix_statement,
-      $.block,
+      $.expression,
     ),
 
-    block: $ => seq(
-      optional($._statement_line_ending),
-      repeat(seq(
-        $.statement,
-        $._statement_line_ending,
-      )),
-    ),
+    _statement_line_ending: $ => /[\n;]/,
 
-    _statement_line_ending: $ => /\s*[;\n]\s*/,
+    comment: $ => choice(
+      seq('//', /[^\n]*/),
+      seq('/*', /[\s\S]*?/, '*/'),
+    ),
 
     // Function declaration
     function_declaration: $ => seq(
@@ -47,8 +51,13 @@ module.exports = grammar({
     ),
 
     parameter_list: $ => seq(
+      $.parameter,
+      repeat(seq(',', $.parameter)),
+    ),
+
+    parameter: $ => seq(
       $.identifier,
-      repeat(seq(',', $.identifier)),
+      optional(seq('=', $.expression)),
     ),
 
     // Control flow statements
@@ -119,9 +128,9 @@ module.exports = grammar({
       'end',
     ),
 
-    return_statement: $ => seq(
-      'return',
-      optional($.expression),
+    return_statement: $ => choice(
+      prec(2, seq('return', $.expression)),
+      prec(1, 'return'),
     ),
 
     break_statement: $ => 'break',
@@ -160,67 +169,83 @@ module.exports = grammar({
 
     expression_statement: $ => $.expression,
 
-    // Expressions
-    expression: $ => choice(
-      $.ternary_expression,
+    // Expressions - using proper precedence
+    expression: $ => $.ternary_expression,
+
+    ternary_expression: $ => prec.right(0,
+      seq(
+        $.logical_or_expression,
+        optional(seq('?', $.expression, ':', $.expression)),
+      ),
     ),
 
-    ternary_expression: $ => seq(
-      $.logical_or_expression,
-      optional(seq('?', $.expression, ':', $.expression)),
+    logical_or_expression: $ => prec.left(1,
+      seq(
+        $.logical_and_expression,
+        repeat(seq('or', $.logical_and_expression)),
+      ),
     ),
 
-    logical_or_expression: $ => seq(
-      $.logical_and_expression,
-      repeat(seq('or', $.logical_and_expression)),
+    logical_and_expression: $ => prec.left(2,
+      seq(
+        $.comparison_expression,
+        repeat(seq('and', $.comparison_expression)),
+      ),
     ),
 
-    logical_and_expression: $ => seq(
-      $.comparison_expression,
-      repeat(seq('and', $.comparison_expression)),
-    ),
-
-    comparison_expression: $ => seq(
-      $.additive_expression,
-      repeat(seq(
-        choice('==', '!=', '<', '>', '<=', '>='),
+    comparison_expression: $ => prec.left(3,
+      seq(
         $.additive_expression,
-      )),
+        repeat(seq(
+          choice('==', '!=', '<', '>', '<=', '>='),
+          $.additive_expression,
+        )),
+      ),
     ),
 
-    additive_expression: $ => seq(
-      $.multiplicative_expression,
-      repeat(seq(
-        choice('+', '-'),
+    additive_expression: $ => prec.left(4,
+      seq(
         $.multiplicative_expression,
-      )),
+        repeat(seq(
+          choice('+', '-'),
+          $.multiplicative_expression,
+        )),
+      ),
     ),
 
-    multiplicative_expression: $ => seq(
-      $.unary_expression,
-      repeat(seq(
-        choice('*', '/', '%'),
+    multiplicative_expression: $ => prec.left(5,
+      seq(
         $.unary_expression,
-      )),
+        repeat(seq(
+          choice('*', '/', '%'),
+          $.unary_expression,
+        )),
+      ),
     ),
 
-    unary_expression: $ => choice(
-      seq(choice('not', '-'), $.unary_expression),
-      $.power_expression,
+    unary_expression: $ => prec.right(6,
+      choice(
+        seq(choice('not', '-'), $.unary_expression),
+        $.power_expression,
+      ),
     ),
 
-    power_expression: $ => seq(
-      $.postfix_expression,
-      optional(seq('^', $.power_expression)),
+    power_expression: $ => prec.right(7,
+      seq(
+        $.postfix_expression,
+        optional(seq('^', $.power_expression)),
+      ),
     ),
 
-    postfix_expression: $ => seq(
-      $.primary_expression,
-      repeat(choice(
-        $.index_access,
-        $.property_access,
-        $.function_call,
-      )),
+    postfix_expression: $ => prec.left(8,
+      seq(
+        $.primary_expression,
+        repeat(prec.left(choice(
+          $.index_access,
+          $.property_access,
+          $.function_call,
+        ))),
+      ),
     ),
 
     primary_expression: $ => choice(
@@ -234,7 +259,6 @@ module.exports = grammar({
       $.function_literal,
       $.array_literal,
       $.object_literal,
-      $.template_string,
       seq('(', $.expression, ')'),
     ),
 
@@ -256,27 +280,13 @@ module.exports = grammar({
 
     multiline_string: $ => choice(
       seq('"""', repeat(choice(
-        /[^"]|"(?!")/,
-        seq('"', /[^"]/),
-        seq('""', /[^"]/),
+        /[^{]/,
         $.template_expression,
       )), '"""'),
       seq("'''", repeat(choice(
-        /[^']|'(?!')/,
-        seq("'", /[^']/),
-        seq("''", /[^']/),
+        /[^{]/,
         $.template_expression,
       )), "'''"),
-    ),
-
-    template_string: $ => seq(
-      '"',
-      repeat(choice(
-        /[^"\\{]/,
-        $.escape_sequence,
-        $.template_expression,
-      )),
-      '"',
     ),
 
     template_expression: $ => seq(
@@ -325,7 +335,7 @@ module.exports = grammar({
 
     object_pair: $ => seq(
       choice($.identifier, $.string),
-      ':',
+      '=',
       $.expression,
     ),
 
@@ -353,10 +363,15 @@ module.exports = grammar({
     function_call: $ => seq(
       '(',
       optional(seq(
-        $.expression,
-        repeat(seq(',', $.expression)),
+        $.argument,
+        repeat(seq(',', $.argument)),
       )),
       ')',
+    ),
+
+    argument: $ => choice(
+      seq($.identifier, '=', $.expression),
+      $.expression,
     ),
 
     // Keywords that are built-in functions

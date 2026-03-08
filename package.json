@@ -2,7 +2,7 @@
   "name": "tree-sitter-duso",
   "version": "1.0.0",
   "description": "Tree-sitter grammar for the Duso scripting language",
-  "main": "index.js",
+  "main": "bindings/node",
   "repository": {
     "type": "git",
     "url": "https://github.com/duso-org/tree-sitter-duso.git"
@@ -22,11 +22,10 @@
     "tree-sitter": "^0.21.1",
     "tree-sitter-cli": "^0.20.8"
   },
-  "dependencies": {
-    "nan": "^2.17.0"
-  },
   "scripts": {
+    "generate": "tree-sitter generate",
     "build": "tree-sitter generate && node-gyp configure build",
+    "build-wasm": "tree-sitter build-wasm",
     "test": "tree-sitter test",
     "parse": "tree-sitter parse"
   }

@@ -22,7 +22,14 @@ This grammar provides full parsing support for Duso syntax, including:
 - Node.js 12.0 or higher
 - tree-sitter-cli (for development)
 
-### Setup
+### Quick Setup
+
+```bash
+npm install --ignore-scripts
+npm run generate
+```
+
+### Full Build (with Node bindings)
 
 ```bash
 npm install

@@ -1,0 +1,13 @@
+function bare_return()
+  return
+end
+
+function with_value()
+  return 42
+end
+
+function return_func()
+  return function(x)
+    return x * 2
+  end
+end

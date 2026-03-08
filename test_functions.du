@@ -1,0 +1,29 @@
+// Assignment
+adder = function(x, y)
+  return x + y
+end
+
+// As function argument
+result = map(items, function(item)
+  return item * 2
+end)
+
+// In array
+funcs = [
+  function(x) return x + 1 end,
+  function(x) return x * 2 end
+]
+
+// In object
+ops = {
+  add: function(x, y) return x + y end,
+  sub: function(x, y) return x - y end
+}
+
+// Nested
+outer = function()
+  inner = function(x)
+    return x * 2
+  end
+  return inner
+end

@@ -3,11 +3,10 @@
     {
       "target_name": "tree_sitter_duso_binding",
       "include_dirs": [
-        "<!(node -e \"const path = require('path'), mod = require('module'); console.log(path.join(path.dirname(mod.resolveFilename('tree-sitter')), '..', 'include'))\")"
+        "<!(node -e \"console.log(require('tree-sitter').includeDirForVersion())\")"
       ],
       "sources": [
-        "src/parser.c",
-        "src/scanner.c"
+        "src/parser.c"
       ],
       "cflags_c": [
         "-std=c99"

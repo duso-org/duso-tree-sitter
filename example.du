@@ -11,7 +11,7 @@ data = nil
 
 // Arrays and objects
 colors = ["red", "green", "blue"]
-config = {timeout: 30, retries: 3, debug: true}
+config = {timeout = 30, retries = 3, debug = true}
 
 // ========================================
 // Strings with templates

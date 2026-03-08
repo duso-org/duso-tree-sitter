@@ -1,0 +1,1 @@
+result = map(function(x) return x * 2 end)

@@ -1,0 +1,7 @@
+function greet(name, greeting="Hello")
+  return greeting + " " + name
+end
+
+result1 = greet("Alice")
+result2 = greet("Bob", "Hi")
+result3 = greet(name="Charlie", greeting="Hey")
