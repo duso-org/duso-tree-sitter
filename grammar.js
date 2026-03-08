@@ -255,6 +255,7 @@ module.exports = grammar({
       $.number,
       $.string,
       $.multiline_string,
+      $.raw_string,
       $.regex,
       $.boolean,
       $.nil,
@@ -290,6 +291,11 @@ module.exports = grammar({
         /[^{]/,
         $.template_expression,
       )), "'''"),
+    ),
+
+    raw_string: $ => seq(
+      'raw',
+      choice($.string, $.multiline_string),
     ),
 
     template_expression: $ => seq(

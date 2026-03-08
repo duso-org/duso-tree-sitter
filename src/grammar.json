@@ -1020,6 +1020,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "raw_string"
+        },
+        {
+          "type": "SYMBOL",
           "name": "regex"
         },
         {
@@ -1198,6 +1202,28 @@
             {
               "type": "STRING",
               "value": "'''"
+            }
+          ]
+        }
+      ]
+    },
+    "raw_string": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "raw"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "string"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "multiline_string"
             }
           ]
         }
