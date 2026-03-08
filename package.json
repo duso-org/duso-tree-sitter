@@ -24,5 +24,6 @@
     "generate": "tree-sitter generate",
     "test": "tree-sitter test",
     "parse": "tree-sitter parse"
-  }
+  },
+  "main": "bindings/node"
 }
