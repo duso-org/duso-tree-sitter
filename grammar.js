@@ -33,17 +33,18 @@ module.exports = grammar({
 
     _statement_line_ending: $ => /[\n;]/,
 
-    comment: $ => token(prec(-1, choice(
+    comment: $ => token(choice(
       /\/\/[^\n]*/,
-      /\/\*[^*]*(\*[^/][^*]*)*\*\//,
-    ))),
+      /\/\*([^*]|\*[^/])*\*\//,
+    )),
 
     // Function declaration
     function_declaration: $ => seq(
       'function',
       $.identifier,
       $.function_parameters,
-      field('body', repeat($.statement)),
+      field('body', repeat(seq($.statement, $._statement_line_ending))),
+      optional($.statement),
       'end',
     ),
 
@@ -68,7 +69,8 @@ module.exports = grammar({
       'if',
       $.expression,
       'then',
-      field('consequence', repeat($.statement)),
+      field('consequence', repeat(seq($.statement, $._statement_line_ending))),
+      optional($.statement),
       repeat($.elseif_clause),
       optional($.else_clause),
       'end',
@@ -78,19 +80,22 @@ module.exports = grammar({
       'elseif',
       $.expression,
       'then',
-      field('consequence', repeat($.statement)),
+      field('consequence', repeat(seq($.statement, $._statement_line_ending))),
+      optional($.statement),
     ),
 
     else_clause: $ => seq(
       'else',
-      field('consequence', repeat($.statement)),
+      field('consequence', repeat(seq($.statement, $._statement_line_ending))),
+      optional($.statement),
     ),
 
     while_statement: $ => seq(
       'while',
       $.expression,
       'do',
-      field('body', repeat($.statement)),
+      field('body', repeat(seq($.statement, $._statement_line_ending))),
+      optional($.statement),
       'end',
     ),
 
@@ -104,7 +109,8 @@ module.exports = grammar({
         $.expression,
         optional(seq(',', $.expression)),
         'do',
-        field('body', repeat($.statement)),
+        field('body', repeat(seq($.statement, $._statement_line_ending))),
+        optional($.statement),
         'end',
       ),
       seq(
@@ -113,19 +119,22 @@ module.exports = grammar({
         'in',
         $.expression,
         'do',
-        field('body', repeat($.statement)),
+        field('body', repeat(seq($.statement, $._statement_line_ending))),
+        optional($.statement),
         'end',
       ),
     ),
 
     try_statement: $ => seq(
       'try',
-      field('try_body', repeat($.statement)),
+      field('try_body', repeat(seq($.statement, $._statement_line_ending))),
+      optional($.statement),
       'catch',
       '(',
       $.identifier,
       ')',
-      field('catch_body', repeat($.statement)),
+      field('catch_body', repeat(seq($.statement, $._statement_line_ending))),
+      optional($.statement),
       'end',
     ),
 
@@ -241,11 +250,11 @@ module.exports = grammar({
     postfix_expression: $ => prec.left(8,
       seq(
         $.primary_expression,
-        repeat(prec.left(choice(
+        repeat(choice(
           $.index_access,
           $.property_access,
           $.function_call,
-        ))),
+        )),
       ),
     ),
 
@@ -269,12 +278,14 @@ module.exports = grammar({
 
     string: $ => choice(
       seq('"', repeat(choice(
-        /[^"\\{]/,
+        /[^"\\{/]/,
+        /\//,
         $.escape_sequence,
         $.template_expression,
       )), '"'),
       seq("'", repeat(choice(
-        /[^'\\{]/,
+        /[^'\\{/]/,
+        /\//,
         $.escape_sequence,
         $.template_expression,
       )), "'"),
@@ -350,7 +361,8 @@ module.exports = grammar({
     function_literal: $ => seq(
       'function',
       $.function_parameters,
-      field('body', repeat($.statement)),
+      field('body', repeat(seq($.statement, $._statement_line_ending))),
+      optional($.statement),
       'end',
     ),
 

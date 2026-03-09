@@ -153,6 +153,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -171,11 +181,15 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "expression",
+          "named": true
+        },
+        {
+          "type": "statement",
           "named": true
         }
       ]
@@ -227,6 +241,10 @@
         {
           "type": "identifier",
           "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
         }
       ]
     }
@@ -272,6 +290,10 @@
         {
           "type": "identifier",
           "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
         }
       ]
     }
@@ -292,11 +314,15 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "function_parameters",
+          "named": true
+        },
+        {
+          "type": "statement",
           "named": true
         }
       ]
@@ -346,6 +372,10 @@
         },
         {
           "type": "expression",
+          "named": true
+        },
+        {
+          "type": "statement",
           "named": true
         }
       ]
@@ -829,11 +859,15 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "statement",
           "named": true
         }
       ]
@@ -893,11 +927,15 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "expression",
+          "named": true
+        },
+        {
+          "type": "statement",
           "named": true
         }
       ]
