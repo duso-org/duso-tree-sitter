@@ -9,9 +9,9 @@
 (try_statement "try" @indent)
 
 ; Closing "end" keywords that decrease indentation
-(function_declaration "end" @dedent)
-(function_literal "end" @dedent)
-(if_statement "end" @dedent)
-(while_statement "end" @dedent)
-(for_statement "end" @dedent)
-(try_statement "end" @dedent)
+(function_declaration "end" @outdent)
+(function_literal "end" @outdent)
+(if_statement "end" @outdent)
+(while_statement "end" @outdent)
+(for_statement "end" @outdent)
+(try_statement "end" @outdent)
