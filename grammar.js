@@ -31,12 +31,12 @@ module.exports = grammar({
       $.expression,
     ),
 
-    _statement_line_ending: $ => /[\n;]/,
+    _statement_line_ending: $ => seq(optional(/[ \t]*\/\/[^\n]*/), /[\n;]/),
 
-    comment: $ => token(choice(
+    comment: $ => token(prec(-1, choice(
       /\/\/[^\n]*/,
       /\/\*([^*]|\*[^/])*\*\//,
-    )),
+    ))),
 
     // Function declaration
     function_declaration: $ => seq(
@@ -277,7 +277,7 @@ module.exports = grammar({
     // Literals
     number: $ => /\d+(\.\d+)?([eE][+-]?\d+)?/,
 
-    string: $ => choice(
+    string: $ => prec(2, choice(
       seq('"', repeat(choice(
         /[^"\\{/]/,
         /\//,
@@ -290,9 +290,9 @@ module.exports = grammar({
         $.escape_sequence,
         $.template_expression,
       )), "'"),
-    ),
+    )),
 
-    multiline_string: $ => choice(
+    multiline_string: $ => prec(3, choice(
       seq('"""', repeat(choice(
         /[^{]/,
         $.template_expression,
@@ -301,7 +301,7 @@ module.exports = grammar({
         /[^{]/,
         $.template_expression,
       )), "'''"),
-    ),
+    )),
 
     raw_string: $ => seq(
       'raw',
