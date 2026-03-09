@@ -153,6 +153,10 @@
         "required": false,
         "types": [
           {
+            "type": "comment",
+            "named": true
+          },
+          {
             "type": "statement",
             "named": true
           }
@@ -178,6 +182,10 @@
         "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "comment",
+            "named": true
+          },
           {
             "type": "statement",
             "named": true
@@ -229,6 +237,10 @@
         "required": false,
         "types": [
           {
+            "type": "comment",
+            "named": true
+          },
+          {
             "type": "statement",
             "named": true
           }
@@ -278,6 +290,10 @@
         "required": false,
         "types": [
           {
+            "type": "comment",
+            "named": true
+          },
+          {
             "type": "statement",
             "named": true
           }
@@ -311,6 +327,10 @@
         "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "comment",
+            "named": true
+          },
           {
             "type": "statement",
             "named": true
@@ -356,6 +376,10 @@
         "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "comment",
+            "named": true
+          },
           {
             "type": "statement",
             "named": true
@@ -855,6 +879,10 @@
         "required": false,
         "types": [
           {
+            "type": "comment",
+            "named": true
+          },
+          {
             "type": "statement",
             "named": true
           }
@@ -864,6 +892,10 @@
         "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "comment",
+            "named": true
+          },
           {
             "type": "statement",
             "named": true
@@ -932,6 +964,10 @@
         "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "comment",
+            "named": true
+          },
           {
             "type": "statement",
             "named": true

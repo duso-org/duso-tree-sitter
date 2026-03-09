@@ -33,7 +33,10 @@ module.exports = grammar({
       $.expression,
     ),
 
-    _statement_line_ending: $ => /[\n;]/,
+    _statement_line_ending: $ => seq(
+      optional($.comment),
+      /[\n;]/,
+    ),
 
     comment: $ => token(prec(1, choice(
       /\/\/[^\n]*/,
