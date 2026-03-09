@@ -101,6 +101,11 @@
     "fields": {}
   },
   {
+    "type": "builtin",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "comparison_expression",
     "named": true,
     "fields": {},
@@ -603,6 +608,10 @@
         },
         {
           "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "builtin",
           "named": true
         },
         {

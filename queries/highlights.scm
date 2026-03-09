@@ -69,22 +69,7 @@
 (property_access (identifier) @property)
 
 ;; Built-in functions
-((identifier) @function.builtin
- (#any-of? @function.builtin
-   "abs" "acos" "asin" "atan" "atan2" "append_file" "breakpoint" "busy" "ceil"
-   "clamp" "contains" "context" "copy_file" "cos" "current_dir" "datastore"
-   "decode_base64" "deep_copy" "doc" "encode_base64" "ends_with" "env" "exit"
-   "exp" "fetch" "file_exists" "file_type" "filter" "find" "floor" "format_json"
-   "format_time" "hash" "hash_password" "http_server" "include" "input" "join"
-   "keys" "kill" "len" "list_dir" "list_files" "load" "log" "ln" "lower"
-   "make_dir" "map" "markdown_ansi" "markdown_html" "max" "min" "move_file"
-   "now" "parallel" "parse" "parse_json" "parse_time" "pi" "pop" "pow" "print"
-   "push" "random" "range" "reduce" "remove_dir" "remove_file" "rename_file"
-   "replace" "repeat" "require" "round" "run" "save" "shift" "sin" "sleep"
-   "sort" "spawn" "split" "sqrt" "starts_with" "substr" "sys" "tan" "template"
-   "throw" "tobool" "tonumber" "tostring" "trim" "type" "unshift" "upper"
-   "uuid" "values" "verify_password" "watch" "write"
- ))
+(builtin) @function.builtin
 
 ;; All other identifiers default to variable
 (identifier) @variable

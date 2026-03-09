@@ -266,6 +266,7 @@ module.exports = grammar({
       $.regex,
       $.boolean,
       $.nil,
+      $.builtin,
       $.identifier,
       $.function_literal,
       $.array_literal,
