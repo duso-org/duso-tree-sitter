@@ -9,10 +9,3 @@
 (try_statement "try" @indent)
 (try_statement "catch" @indent)
 
-;; Decrease indentation at 'end' keyword
-(if_statement "end" @outdent)
-(while_statement "end" @outdent)
-(for_statement "end" @outdent)
-(function_declaration "end" @outdent)
-(function_literal "end" @outdent)
-(try_statement "end" @outdent)
