@@ -25,6 +25,9 @@
 (function_declaration "function" @keyword)
 (function_declaration "end" @keyword)
 
+(function_literal "function" @keyword)
+(function_literal "end" @keyword)
+
 (try_statement "try" @keyword)
 (try_statement "catch" @keyword)
 (try_statement "end" @keyword)
@@ -90,6 +93,10 @@
 
 ;; Parameters in function declarations
 (parameter (identifier) @variable.parameter)
+
+;; Ternary operator
+(ternary_expression "?" @operator)
+(ternary_expression ":" @operator)
 
 ;; Brackets and parens
 (function_call "(" @punctuation.bracket)

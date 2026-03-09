@@ -120,7 +120,7 @@
             },
             {
               "type": "PATTERN",
-              "value": "[\\s\\S]*?"
+              "value": "[^*]*(\\*[^/][^*]*)*"
             },
             {
               "type": "STRING",

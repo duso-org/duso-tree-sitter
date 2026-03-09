@@ -35,7 +35,7 @@ module.exports = grammar({
 
     comment: $ => choice(
       seq('//', /[^\n]*/),
-      seq('/*', /[\s\S]*?/, '*/'),
+      seq('/*', /[^*]*(\*[^/][^*]*)*/, '*/'),
     ),
 
     // Function declaration
