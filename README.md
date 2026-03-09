@@ -156,6 +156,15 @@ npm test
 tree-sitter parse --debug example.du
 ```
 
+
+## Contributing
+
+We'd love your contributions!
+
+## Related Projects
+
+- [Duso Language](https://github.com/duso-org/duso) - The main Duso repository
+
 ## License
 
-MIT
+© 2026 Ludonode LLC | Licensed under [Apache License 2.0](LICENSE)
