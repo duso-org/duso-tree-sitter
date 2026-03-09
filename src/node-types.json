@@ -101,11 +101,6 @@
     "fields": {}
   },
   {
-    "type": "comment",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "comparison_expression",
     "named": true,
     "fields": {},
@@ -889,10 +884,6 @@
     "named": false
   },
   {
-    "type": "*/",
-    "named": false
-  },
-  {
     "type": "*=",
     "named": false
   },
@@ -930,14 +921,6 @@
   },
   {
     "type": "/",
-    "named": false
-  },
-  {
-    "type": "/*",
-    "named": false
-  },
-  {
-    "type": "//",
     "named": false
   },
   {
@@ -1043,6 +1026,10 @@
   {
     "type": "clamp",
     "named": false
+  },
+  {
+    "type": "comment",
+    "named": true
   },
   {
     "type": "contains",
