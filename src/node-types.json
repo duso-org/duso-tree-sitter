@@ -199,80 +199,9 @@
     }
   },
   {
-    "type": "for_statement",
+    "type": "for_iterator_statement",
     "named": true,
-    "fields": {
-      "comma1": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": ",",
-            "named": false
-          }
-        ]
-      },
-      "comma2": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": ",",
-            "named": false
-          }
-        ]
-      },
-      "do_keyword": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "do",
-            "named": false
-          }
-        ]
-      },
-      "end_keyword": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "end",
-            "named": false
-          }
-        ]
-      },
-      "equals": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "=",
-            "named": false
-          }
-        ]
-      },
-      "in_keyword": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "in",
-            "named": false
-          }
-        ]
-      },
-      "start_keyword": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "for",
-            "named": false
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
@@ -287,6 +216,48 @@
         },
         {
           "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_numeric_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "for_iterator_statement",
+          "named": true
+        },
+        {
+          "type": "for_numeric_statement",
           "named": true
         }
       ]

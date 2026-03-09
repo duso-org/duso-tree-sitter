@@ -357,145 +357,113 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SEQ",
+          "type": "SYMBOL",
+          "name": "for_numeric_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "for_iterator_statement"
+        }
+      ]
+    },
+    "for_numeric_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "for"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "SYMBOL",
+          "name": "expression"
+        },
+        {
+          "type": "STRING",
+          "value": ","
+        },
+        {
+          "type": "SYMBOL",
+          "name": "expression"
+        },
+        {
+          "type": "CHOICE",
           "members": [
             {
-              "type": "FIELD",
-              "name": "start_keyword",
-              "content": {
-                "type": "STRING",
-                "value": "for"
-              }
-            },
-            {
-              "type": "SYMBOL",
-              "name": "identifier"
-            },
-            {
-              "type": "FIELD",
-              "name": "equals",
-              "content": {
-                "type": "STRING",
-                "value": "="
-              }
-            },
-            {
-              "type": "SYMBOL",
-              "name": "expression"
-            },
-            {
-              "type": "FIELD",
-              "name": "comma1",
-              "content": {
-                "type": "STRING",
-                "value": ","
-              }
-            },
-            {
-              "type": "SYMBOL",
-              "name": "expression"
-            },
-            {
-              "type": "CHOICE",
+              "type": "SEQ",
               "members": [
                 {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "FIELD",
-                      "name": "comma2",
-                      "content": {
-                        "type": "STRING",
-                        "value": ","
-                      }
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "expression"
-                    }
-                  ]
+                  "type": "STRING",
+                  "value": ","
                 },
                 {
-                  "type": "BLANK"
+                  "type": "SYMBOL",
+                  "name": "expression"
                 }
               ]
             },
             {
-              "type": "FIELD",
-              "name": "do_keyword",
-              "content": {
-                "type": "STRING",
-                "value": "do"
-              }
-            },
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "SYMBOL",
-                "name": "statement"
-              }
-            },
-            {
-              "type": "FIELD",
-              "name": "end_keyword",
-              "content": {
-                "type": "STRING",
-                "value": "end"
-              }
+              "type": "BLANK"
             }
           ]
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "FIELD",
-              "name": "start_keyword",
-              "content": {
-                "type": "STRING",
-                "value": "for"
-              }
-            },
-            {
-              "type": "SYMBOL",
-              "name": "identifier"
-            },
-            {
-              "type": "FIELD",
-              "name": "in_keyword",
-              "content": {
-                "type": "STRING",
-                "value": "in"
-              }
-            },
-            {
-              "type": "SYMBOL",
-              "name": "expression"
-            },
-            {
-              "type": "FIELD",
-              "name": "do_keyword",
-              "content": {
-                "type": "STRING",
-                "value": "do"
-              }
-            },
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "SYMBOL",
-                "name": "statement"
-              }
-            },
-            {
-              "type": "FIELD",
-              "name": "end_keyword",
-              "content": {
-                "type": "STRING",
-                "value": "end"
-              }
-            }
-          ]
+          "type": "STRING",
+          "value": "do"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "statement"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "end"
+        }
+      ]
+    },
+    "for_iterator_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "for"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "STRING",
+          "value": "in"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "expression"
+        },
+        {
+          "type": "STRING",
+          "value": "do"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "statement"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "end"
         }
       ]
     },
