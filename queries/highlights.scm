@@ -13,10 +13,14 @@
 (while_statement "do" @keyword)
 (while_statement "end" @keyword)
 
-(for_statement "for" @keyword)
-(for_statement "in" @keyword)
-(for_statement "do" @keyword)
-(for_statement "end" @keyword)
+(for_numeric_statement "for" @keyword)
+(for_numeric_statement "do" @keyword)
+(for_numeric_statement "end" @keyword)
+
+(for_iterator_statement "for" @keyword)
+(for_iterator_statement "in" @keyword)
+(for_iterator_statement "do" @keyword)
+(for_iterator_statement "end" @keyword)
 
 (function_declaration "function" @keyword)
 (function_declaration "end" @keyword)
