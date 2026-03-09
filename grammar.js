@@ -97,26 +97,26 @@ module.exports = grammar({
     for_statement: $ => choice(
       // Numeric for: for i = 1, 10 do ... end
       seq(
-        'for',
+        field('start_keyword', 'for'),
         $.identifier,
-        '=',
+        field('equals', '='),
         $.expression,
-        ',',
+        field('comma1', ','),
         $.expression,
-        optional(seq(',', $.expression)),
-        'do',
+        optional(seq(field('comma2', ','), $.expression)),
+        field('do_keyword', 'do'),
         repeat($.statement),
-        'end',
+        field('end_keyword', 'end'),
       ),
       // Iterator for: for item in array do ... end
       seq(
-        'for',
+        field('start_keyword', 'for'),
         $.identifier,
-        'in',
+        field('in_keyword', 'in'),
         $.expression,
-        'do',
+        field('do_keyword', 'do'),
         repeat($.statement),
-        'end',
+        field('end_keyword', 'end'),
       ),
     ),
 
