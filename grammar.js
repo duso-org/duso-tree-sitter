@@ -3,16 +3,16 @@ module.exports = grammar({
 
   extras: $ => [
     /\s/,
-    $.comment,
   ],
 
   rules: {
     source_file: $ => seq(
       repeat(seq(
+        optional($.comment),
         $.statement,
         $._statement_line_ending,
       )),
-      optional($.statement),
+      optional(seq(optional($.comment), $.statement)),
     ),
 
     statement: $ => choice(
