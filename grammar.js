@@ -1,10 +1,6 @@
 module.exports = grammar({
   name: 'duso',
 
-  externals: $ => [
-    $.comment,
-  ],
-
   extras: $ => [
     /\s/,
     $.comment,
@@ -36,6 +32,11 @@ module.exports = grammar({
     ),
 
     _statement_line_ending: $ => /[\n;]/,
+
+    comment: $ => token(prec(-1, choice(
+      /\/\/[^\n]*/,
+      /\/\*[^*]*(\*[^/][^*]*)*\*\//,
+    ))),
 
     // Function declaration
     function_declaration: $ => seq(
