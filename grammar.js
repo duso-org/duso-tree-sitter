@@ -94,29 +94,28 @@ module.exports = grammar({
       'end',
     ),
 
-    for_statement: $ => choice($.for_numeric_statement, $.for_iterator_statement),
-
-    for_numeric_statement: $ => seq(
-      'for',
-      $.identifier,
-      '=',
-      $.expression,
-      ',',
-      $.expression,
-      optional(seq(',', $.expression)),
-      'do',
-      repeat($.statement),
-      'end',
-    ),
-
-    for_iterator_statement: $ => seq(
-      'for',
-      $.identifier,
-      'in',
-      $.expression,
-      'do',
-      repeat($.statement),
-      'end',
+    for_statement: $ => choice(
+      seq(
+        'for',
+        $.identifier,
+        '=',
+        $.expression,
+        ',',
+        $.expression,
+        optional(seq(',', $.expression)),
+        'do',
+        repeat($.statement),
+        'end',
+      ),
+      seq(
+        'for',
+        $.identifier,
+        'in',
+        $.expression,
+        'do',
+        repeat($.statement),
+        'end',
+      ),
     ),
 
     try_statement: $ => seq(
