@@ -7,15 +7,24 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SEQ",
+            "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "statement"
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "statement"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_statement_line_ending"
+                  }
+                ]
               },
               {
                 "type": "SYMBOL",
-                "name": "_statement_line_ending"
+                "name": "comment"
               }
             ]
           }
@@ -92,31 +101,14 @@
       ]
     },
     "_statement_line_ending": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "PATTERN",
-              "value": "[ \\t]*\\/\\/[^\\n]*"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "PATTERN",
-          "value": "[\\n;]"
-        }
-      ]
+      "type": "PATTERN",
+      "value": "[\\n;]"
     },
     "comment": {
       "type": "TOKEN",
       "content": {
         "type": "PREC",
-        "value": -1,
+        "value": 1,
         "content": {
           "type": "CHOICE",
           "members": [
@@ -1319,20 +1311,16 @@
                   "type": "CHOICE",
                   "members": [
                     {
-                      "type": "PATTERN",
-                      "value": "[^\"\\\\{/]"
-                    },
-                    {
-                      "type": "PATTERN",
-                      "value": "\\/"
-                    },
-                    {
                       "type": "SYMBOL",
                       "name": "escape_sequence"
                     },
                     {
                       "type": "SYMBOL",
                       "name": "template_expression"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[^\"\\\\{]"
                     }
                   ]
                 }
@@ -1356,20 +1344,16 @@
                   "type": "CHOICE",
                   "members": [
                     {
-                      "type": "PATTERN",
-                      "value": "[^'\\\\{/]"
-                    },
-                    {
-                      "type": "PATTERN",
-                      "value": "\\/"
-                    },
-                    {
                       "type": "SYMBOL",
                       "name": "escape_sequence"
                     },
                     {
                       "type": "SYMBOL",
                       "name": "template_expression"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[^'\\\\{]"
                     }
                   ]
                 }
@@ -1402,12 +1386,12 @@
                   "type": "CHOICE",
                   "members": [
                     {
-                      "type": "PATTERN",
-                      "value": "[^{]"
-                    },
-                    {
                       "type": "SYMBOL",
                       "name": "template_expression"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[^{]"
                     }
                   ]
                 }
@@ -1431,12 +1415,12 @@
                   "type": "CHOICE",
                   "members": [
                     {
-                      "type": "PATTERN",
-                      "value": "[^{]"
-                    },
-                    {
                       "type": "SYMBOL",
                       "name": "template_expression"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[^{]"
                     }
                   ]
                 }
@@ -1536,42 +1520,46 @@
       ]
     },
     "regex": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "~"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "[^~\\\\]"
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "\\"
-                  },
-                  {
-                    "type": "PATTERN",
-                    "value": "."
-                  }
-                ]
-              }
-            ]
+      "type": "PREC",
+      "value": 3,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "~"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "[^~\\\\]"
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "\\"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "."
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "type": "STRING",
+            "value": "~"
           }
-        },
-        {
-          "type": "STRING",
-          "value": "~"
-        }
-      ]
+        ]
+      }
     },
     "boolean": {
       "type": "CHOICE",
@@ -2390,10 +2378,6 @@
     {
       "type": "PATTERN",
       "value": "\\s"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "comment"
     }
   ],
   "conflicts": [],

@@ -3,14 +3,16 @@ module.exports = grammar({
 
   extras: $ => [
     /\s/,
-    $.comment,
   ],
 
   rules: {
     source_file: $ => seq(
-      repeat(seq(
-        $.statement,
-        $._statement_line_ending,
+      repeat(choice(
+        seq(
+          $.statement,
+          $._statement_line_ending,
+        ),
+        $.comment,
       )),
       optional($.statement),
     ),
@@ -31,9 +33,9 @@ module.exports = grammar({
       $.expression,
     ),
 
-    _statement_line_ending: $ => seq(optional(/[ \t]*\/\/[^\n]*/), /[\n;]/),
+    _statement_line_ending: $ => /[\n;]/,
 
-    comment: $ => token(prec(-1, choice(
+    comment: $ => token(prec(1, choice(
       /\/\/[^\n]*/,
       /\/\*([^*]|\*[^/])*\*\//,
     ))),
@@ -279,27 +281,25 @@ module.exports = grammar({
 
     string: $ => prec(2, choice(
       seq('"', repeat(choice(
-        /[^"\\{/]/,
-        /\//,
         $.escape_sequence,
         $.template_expression,
+        /[^"\\{]/,
       )), '"'),
       seq("'", repeat(choice(
-        /[^'\\{/]/,
-        /\//,
         $.escape_sequence,
         $.template_expression,
+        /[^'\\{]/,
       )), "'"),
     )),
 
     multiline_string: $ => prec(3, choice(
       seq('"""', repeat(choice(
-        /[^{]/,
         $.template_expression,
+        /[^{]/,
       )), '"""'),
       seq("'''", repeat(choice(
-        /[^{]/,
         $.template_expression,
+        /[^{]/,
       )), "'''"),
     )),
 
@@ -319,14 +319,14 @@ module.exports = grammar({
       choice('n', 't', 'r', '\\', '"', "'", '{', '}'),
     ),
 
-    regex: $ => seq(
+    regex: $ => prec(3, seq(
       '~',
       repeat(choice(
         /[^~\\]/,
         seq('\\', /./),
       )),
       '~',
-    ),
+    )),
 
     boolean: $ => choice('true', 'false'),
     nil: $ => 'nil',
