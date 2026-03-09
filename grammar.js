@@ -1,22 +1,20 @@
 module.exports = grammar({
   name: 'duso',
 
-  externals: $ => [
-    $.comment,
-  ],
-
   extras: $ => [
     /\s/,
-    $.comment,
   ],
 
   rules: {
     source_file: $ => seq(
-      repeat(seq(
-        $.statement,
-        $._statement_line_ending,
+      repeat(choice(
+        $.comment,
+        seq(
+          $.statement,
+          $._statement_line_ending,
+        ),
       )),
-      optional($.statement),
+      optional(choice($.comment, $.statement)),
     ),
 
     statement: $ => choice(
@@ -37,6 +35,10 @@ module.exports = grammar({
 
     _statement_line_ending: $ => /[\n;]/,
 
+    comment: $ => choice(
+      /\/\/[^\n]*/,
+      /\/\*[^*]*(\*[^/][^*]*)*\*\//,
+    ),
 
     // Function declaration
     function_declaration: $ => seq(
