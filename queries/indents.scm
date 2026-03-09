@@ -1,39 +1,17 @@
-; Function declarations
-(function_declaration
-  body: (statement) @indent)
+; Opening keywords that increase indentation
+(function_declaration "function" @indent)
+(function_literal "function" @indent)
+(if_statement "then" @indent)
+(elseif_clause "then" @indent)
+(else_clause "else" @indent)
+(while_statement "do" @indent)
+(for_statement "do" @indent)
+(try_statement "try" @indent)
+
+; Closing "end" keywords that decrease indentation
 (function_declaration "end" @dedent)
-
-; Function literals
-(function_literal
-  body: (statement) @indent)
 (function_literal "end" @dedent)
-
-; If statements
-(if_statement
-  consequence: (statement) @indent)
 (if_statement "end" @dedent)
-
-; Elseif clauses
-(elseif_clause
-  consequence: (statement) @indent)
-
-; Else clauses
-(else_clause
-  consequence: (statement) @indent)
-
-; While statements
-(while_statement
-  body: (statement) @indent)
 (while_statement "end" @dedent)
-
-; For statements
-(for_statement
-  body: (statement) @indent)
 (for_statement "end" @dedent)
-
-; Try statements
-(try_statement
-  try_body: (statement) @indent)
-(try_statement
-  catch_body: (statement) @indent)
 (try_statement "end" @dedent)
