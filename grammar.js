@@ -43,7 +43,7 @@ module.exports = grammar({
       'function',
       $.identifier,
       $.function_parameters,
-      repeat($.statement),
+      field('body', repeat($.statement)),
       'end',
     ),
 
@@ -68,7 +68,7 @@ module.exports = grammar({
       'if',
       $.expression,
       'then',
-      repeat($.statement),
+      field('consequence', repeat($.statement)),
       repeat($.elseif_clause),
       optional($.else_clause),
       'end',
@@ -78,19 +78,19 @@ module.exports = grammar({
       'elseif',
       $.expression,
       'then',
-      repeat($.statement),
+      field('consequence', repeat($.statement)),
     ),
 
     else_clause: $ => seq(
       'else',
-      repeat($.statement),
+      field('consequence', repeat($.statement)),
     ),
 
     while_statement: $ => seq(
       'while',
       $.expression,
       'do',
-      repeat($.statement),
+      field('body', repeat($.statement)),
       'end',
     ),
 
@@ -104,7 +104,7 @@ module.exports = grammar({
         $.expression,
         optional(seq(',', $.expression)),
         'do',
-        repeat($.statement),
+        field('body', repeat($.statement)),
         'end',
       ),
       seq(
@@ -113,19 +113,19 @@ module.exports = grammar({
         'in',
         $.expression,
         'do',
-        repeat($.statement),
+        field('body', repeat($.statement)),
         'end',
       ),
     ),
 
     try_statement: $ => seq(
       'try',
-      repeat($.statement),
+      field('try_body', repeat($.statement)),
       'catch',
       '(',
       $.identifier,
       ')',
-      repeat($.statement),
+      field('catch_body', repeat($.statement)),
       'end',
     ),
 
@@ -350,7 +350,7 @@ module.exports = grammar({
     function_literal: $ => seq(
       'function',
       $.function_parameters,
-      repeat($.statement),
+      field('body', repeat($.statement)),
       'end',
     ),
 

@@ -131,10 +131,14 @@
           "name": "function_parameters"
         },
         {
-          "type": "REPEAT",
+          "type": "FIELD",
+          "name": "body",
           "content": {
-            "type": "SYMBOL",
-            "name": "statement"
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "statement"
+            }
           }
         },
         {
@@ -239,10 +243,14 @@
           "value": "then"
         },
         {
-          "type": "REPEAT",
+          "type": "FIELD",
+          "name": "consequence",
           "content": {
-            "type": "SYMBOL",
-            "name": "statement"
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "statement"
+            }
           }
         },
         {
@@ -286,10 +294,14 @@
           "value": "then"
         },
         {
-          "type": "REPEAT",
+          "type": "FIELD",
+          "name": "consequence",
           "content": {
-            "type": "SYMBOL",
-            "name": "statement"
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "statement"
+            }
           }
         }
       ]
@@ -302,10 +314,14 @@
           "value": "else"
         },
         {
-          "type": "REPEAT",
+          "type": "FIELD",
+          "name": "consequence",
           "content": {
-            "type": "SYMBOL",
-            "name": "statement"
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "statement"
+            }
           }
         }
       ]
@@ -326,10 +342,14 @@
           "value": "do"
         },
         {
-          "type": "REPEAT",
+          "type": "FIELD",
+          "name": "body",
           "content": {
-            "type": "SYMBOL",
-            "name": "statement"
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "statement"
+            }
           }
         },
         {
@@ -394,10 +414,14 @@
               "value": "do"
             },
             {
-              "type": "REPEAT",
+              "type": "FIELD",
+              "name": "body",
               "content": {
-                "type": "SYMBOL",
-                "name": "statement"
+                "type": "REPEAT",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "statement"
+                }
               }
             },
             {
@@ -430,10 +454,14 @@
               "value": "do"
             },
             {
-              "type": "REPEAT",
+              "type": "FIELD",
+              "name": "body",
               "content": {
-                "type": "SYMBOL",
-                "name": "statement"
+                "type": "REPEAT",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "statement"
+                }
               }
             },
             {
@@ -452,10 +480,14 @@
           "value": "try"
         },
         {
-          "type": "REPEAT",
+          "type": "FIELD",
+          "name": "try_body",
           "content": {
-            "type": "SYMBOL",
-            "name": "statement"
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "statement"
+            }
           }
         },
         {
@@ -475,10 +507,14 @@
           "value": ")"
         },
         {
-          "type": "REPEAT",
+          "type": "FIELD",
+          "name": "catch_body",
           "content": {
-            "type": "SYMBOL",
-            "name": "statement"
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "statement"
+            }
           }
         },
         {
@@ -1486,10 +1522,14 @@
           "name": "function_parameters"
         },
         {
-          "type": "REPEAT",
+          "type": "FIELD",
+          "name": "body",
           "content": {
-            "type": "SYMBOL",
-            "name": "statement"
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "statement"
+            }
           }
         },
         {
