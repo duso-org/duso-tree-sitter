@@ -53,6 +53,7 @@
 ;; String and template literals
 (string) @string
 (multiline_string) @string
+(regex) @string.regex
 (template_expression "{{" @punctuation.special)
 (template_expression "}}" @punctuation.special)
 (template_expression (expression) @none)
